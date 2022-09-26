@@ -34,7 +34,7 @@ report = LightHouseDataExtract(
 
 If you want to seperate URLs in categories
 
-Your  CSV of URLs should have two columns: without headers. Below you can see  an example:
+Your CSV of URLs should have two columns, without headers. Below you can see  an example:
 
 |                                 |                  |
 |---------------------------------|------------------|
@@ -73,5 +73,5 @@ display(df_resources)
 ## If json files are obtained by gooogle pagespeed insights api then
 
 ```python
-my_report = LightHouseDataExtract(from_api=True)
+api_report = LightHouseDataExtract(from_api=True)
 ``` 
