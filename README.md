@@ -7,7 +7,7 @@ This tool  parses the google lighthouse json data, accepts a csv file for catego
 ## Install
 
 ```python
-  pip install lighthousedataextract 
+pip install lighthousedataextract 
 ```
 
 ## Import 
