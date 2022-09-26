@@ -6,7 +6,7 @@ from collections import OrderedDict
 
 class LightHouseDataExtract:
 
-    def __init__(self, path_to_json='./report/lighthouse/',url_category_file=None):
+    def __init__(self, path_to_json='./report/lighthouse/',url_category_file=None,from_api=False):
 
        self.jsonpath_page_size = parse("$.audits.total-byte-weight")
        self.jsonpath_first_meaningful_paint = parse("$.audits.first-meaningful-paint")
@@ -20,7 +20,7 @@ class LightHouseDataExtract:
 
        self.path_to_json = path_to_json 
        self.json_files = [path_to_json+pos_json for pos_json in os.listdir(path_to_json) if pos_json.endswith('.json') and 'summary' not in  pos_json ]
-
+       self.from_api= from_api
        self.url_category_file = url_category_file
        self.url_category = self.find_url_category_dict()
        self.category="other"
@@ -33,15 +33,11 @@ class LightHouseDataExtract:
        self.report = self.get_report()
 
     def find_url_category_dict(self):
-        try:
-           result = {}
-           if self.url_category_file!=None:
-              df = pd.read_csv(self.url_category_file,names=['url', 'category'], header=None)
-              result = OrderedDict(zip(df['url'], df['category']))
-           return result
-        except Exception as e:
-            print("Attention!", e.__class__, "occurred.")
-                 
+        result = {}
+        if self.url_category_file!=None:
+           df = pd.read_csv(self.url_category_file,names=['url', 'category'], header=None)
+           result = OrderedDict(zip(df['url'], df['category']))
+        return result
 
     def df_lh_perf_metrics(self):
         df = pd.DataFrame(self.lh_perf_metrics_data, columns = ['url','fetch_time','category','page_size','score','first_contentful_paint','max_potential_fid','time_to_interactive','first_meaningful_paint','speed_index'])
@@ -60,6 +56,8 @@ class LightHouseDataExtract:
         for file in self.json_files:
             with open(file) as f:
                  self.report = json.load(f)  
+                 if self.from_api:
+                    self.report = self.report['lighthouseResult']
             self.find_lh_perf_metrics_data()
             self.find_opportunities_data()
             self.find_diagnostics_data()
@@ -67,6 +65,7 @@ class LightHouseDataExtract:
  
     def find_lh_perf_metrics_data(self): 
         lh_perf_metrics_data=[]
+        parse("$.audits.total-byte-weight")
         self.url= self.report['requestedUrl']
         self.fetch_time = self.report['fetchTime']
         if self.url_category_file!=None:
