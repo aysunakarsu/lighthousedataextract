@@ -75,3 +75,6 @@ display(df_resources)
 ```python
 api_report = LightHouseDataExtract(from_api=True)
 ``` 
+
+<a href="https://www.buymeacoffee.com/aysunakarsu" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
