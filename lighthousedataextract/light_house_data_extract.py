@@ -43,7 +43,7 @@ class LightHouseDataExtract:
            result = OrderedDict(zip(df['url'], df['category']))
         return result
 
-    def df_lh_perf_metrics(self):
+    def df_report(self):
         df = pd.DataFrame(self.lh_perf_metrics_data, columns = ['url','fetch_time','category','page_size','score','first_contentful_paint','largest_contentful_paint','first_meaningful_paint','speed_index','total_blocking_time','max_potential_fid','server_response_time','interactive'])
         return df
     def df_opportunities(self):

@@ -56,8 +56,8 @@ report = LightHouseDataExtract(
     path_to_json="./data/lighthouse/report/lighthouse/",
     url_category_file="./data/lighthouse/category.csv",
 )
-df_lh_perf_metrics = report.df_lh_perf_metrics()
-df_lh_perf_metrics.set_index("url").T
+df_report = report.df_report()
+df_report.set_index("url").T
 ```
 
 
