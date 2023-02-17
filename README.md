@@ -18,7 +18,7 @@ from lighthousedataextract import LightHouseDataExtract
 
 ## Create a report variable
 
-If json files are in directory ./repprt/lighthouse/ and you don't want to give an input file for categories of URLs
+If json files are in directory ./report/lighthouse/ and you don't want to give an input file for categories of URLs
 
 ```python
 report = LightHouseDataExtract() 
